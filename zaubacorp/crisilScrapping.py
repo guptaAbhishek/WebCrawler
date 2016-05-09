@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import ElementNotVisibleException
+from bs4 import BeautifulSoup
 
 
 def init_driver():
@@ -17,9 +18,11 @@ def lookup(driver):
     driver.get('http://www.crisil.com/ratings/credit-ratings-list.jsp')
     data = {}
     count = 0
-    with open('companies1.csv','a') as file:
+    with open('crisilData/j.csv','a') as file:
         writer = csv.writer(file)
         try:
+            j = driver.find_element_by_link_text('J')
+            j.click()
             for trs in driver.find_elements_by_xpath('//table[@cellpadding=3][@cellspacing=1][@border=0]//tbody//tr'):
                 if trs.find_elements_by_xpath('//tr[@valign=top]'):
                     for tds in trs.find_elements_by_xpath('//tr[@valign=top]'):
@@ -28,11 +31,12 @@ def lookup(driver):
                         count +=1
                         if(company_name !='' and industry!=''):
                             writer.writerow([company_name,industry])
-                            print(company_name)
 
                 else:
                     for tds in trs.find_elements_by_xpath('//tr'):
-                        writer.writerow([tds.text])
+                        strA = tds.text
+                        strA = strA.replace(u"\xf6","")
+                        writer.writerow([strA])
                         print(tds.text)
 
                 writer.write('\n')

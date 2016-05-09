@@ -24,7 +24,7 @@ def getJobLinks(page):
         url = link.get('href')
         if url:
             if '/jobs' in url:
-                links.append(ulr)
+                links.append(url)
     return links
 
 def getID(url):
