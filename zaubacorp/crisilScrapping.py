@@ -18,11 +18,11 @@ def lookup(driver):
     driver.get('http://www.crisil.com/ratings/credit-ratings-list.jsp')
     data = {}
     count = 0
-    with open('crisilData/j.csv','a') as file:
+    with open('crisilData/o.csv','a') as file:
         writer = csv.writer(file)
         try:
-            j = driver.find_element_by_link_text('J')
-            j.click()
+            o = driver.find_element_by_link_text('O')
+            o.click()
             for trs in driver.find_elements_by_xpath('//table[@cellpadding=3][@cellspacing=1][@border=0]//tbody//tr'):
                 if trs.find_elements_by_xpath('//tr[@valign=top]'):
                     for tds in trs.find_elements_by_xpath('//tr[@valign=top]'):
