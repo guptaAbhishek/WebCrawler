@@ -25,7 +25,7 @@ def get_user_details_link(page):
 
 def get_user_details(driver,page):
     search_results = []
-    links = get_user_details_link(page,'nitrkl.ac.in')
+    links = get_user_details_link(page)
 
     for link in links:
         driver.get(link)

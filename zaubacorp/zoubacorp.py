@@ -11,14 +11,13 @@ from bs4 import BeautifulSoup
 
 def init_driver():
     driver = webdriver.Firefox()
-    driver.set_window_size(1120,550)
     driver.wait = WebDriverWait(driver,5)
     print('[+] ZaubaCorp Scrapping Started[+]')
     return driver
 
 
 def lookup(driver,company):
-    with open('chargesAndBorrowings.csv','a') as file:
+    with open('zaubaData/charges_borrowings_D.csv','a') as file:
         # fieldnames = ['company_name', 'cin','company_status','date_of_incorporation','age_of_company','company_activity','auth_capital','paid_up_capital','company_address','email']
         writer = csv.writer(file)
         # writer.writeheader()
@@ -64,12 +63,10 @@ def lookup(driver,company):
 
 if __name__ == "__main__":
     driver = init_driver()
-    file = open('companies_list.csv','rU')
+    file = open('crisilFormatedData/Crisil_Companies_D_Details - Companies.csv','rU')
     for line in file:
         cells = line.split(',')
-        lookup(driver,cells[2])
+        lookup(driver,cells[0])
     time.sleep(5)
     file.close()
     driver.quit()
-
-# //*[@id="block-system-main"]/div[2]/div[1]/div[1]/table/thead/tr/td[2]/p/a
