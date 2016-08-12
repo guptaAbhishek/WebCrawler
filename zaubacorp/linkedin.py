@@ -88,6 +88,8 @@ def Main():
     ViewBot(browser)
     browser.close()
 
+
+
 def init_driver():
     browser = webdriver.Firefox()
     browser.wait = WebDriverWait(browser,5)
